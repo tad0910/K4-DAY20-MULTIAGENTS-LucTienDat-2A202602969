@@ -19,9 +19,11 @@
 
 ## 3. Làm quen Deep Agents (Phần 0.3)
 
-1. Tác tử Deep Agents sử dụng vòng lặp ReAct tích hợp sẵn các công cụ thao tác tệp tin (`read_file`, `write_file`, `edit_file`), thực thi dòng lệnh (`execute`) và công cụ giao việc (`task`).
-2. Môi trường thực thi được cô lập an toàn thông qua `LocalShellBackend(root_dir=sandbox)` với cơ chế ẩn toàn bộ khóa API môi trường (`LAB_API_KEY`, `OPENAI_API_KEY`, v.v.) khỏi shell của tác tử.
-3. Khi nạp `skills/`, Deep Agents tự động gắn đường dẫn kỹ năng vào ngữ cảnh hệ thống và hướng dẫn tác tử đọc các tệp `SKILL.md` áp dụng tương ứng trước khi thực thi.
+1. Tác tử mặc định có 9 công cụ: 7 công cụ thao tác tệp (`ls`, `read_file`, `write_file`, `edit_file`, `delete`, `glob`, `grep`), 1 công cụ dòng lệnh shell (`execute`), và 1 công cụ điều phối subagent (`task`). Công cụ duy nhất cho phép chạy lệnh hệ thống là `execute`.
+2. Mô tả của công cụ `task` nêu rằng subagent `general-purpose` được dùng để nghiên cứu các câu hỏi phức tạp, tìm kiếm tệp và thực thi tác vụ nhiều bước (có đầy đủ công cụ như tác tử chính). Về mặt ngữ cảnh, mỗi lần gọi subagent là phi trạng thái (stateless by default): subagent chỉ nhìn thấy duy nhất nội dung prompt mà tác tử chính truyền sang, hoàn toàn không kế thừa lịch sử hội thoại trước đó của tác tử chính.
+3. Trích dẫn hướng dẫn hành vi:
+   - Từ mô tả công cụ `task`: *"Put full detail in the prompt and state exactly what it should return — unless an agent type below says it inherits your conversation instead."*
+   - Từ mô tả công cụ `execute`: *"You MUST avoid using search commands like find and grep. Instead use the grep, glob tools to search. Use read_file rather than cat/head/tail."*
 
 ## 4. Đường cơ sở và phân loại lỗi (Phần 2.2)
 
@@ -127,4 +129,9 @@ Thí nghiệm đã xây dựng hoàn chỉnh và kiểm chứng thành công to�
   10. `python scripts/verify_freeze.py` (Xác thực quy trình đóng băng - Output: OK).
   11. `python -m lab.compare > report/table.md` (Xuất bảng đối chiếu kết quả).
   12. `python scripts/check_breakdown.py` (Phân tích bóc tách kỹ thuật và quy ước).
-- Thử thách mở rộng: Thiết kế subagents chuyên biệt (explorer, implementer, reviewer) và cơ chế phòng chống lỗi bash heredoc trên môi trường Windows PowerShell.
+- Thử thách mở rộng (Phần 6 - Hướng 6d: Subagent nạp kỹ năng & Kiểm soát an toàn môi trường Windows):
+  - **Thiết kế thí nghiệm:** Tách biệt cấu trúc đa tác tử với 3 vai trò phân nhiệm (`explorer`, `implementer`, `reviewer`). Tích hợp `EXECUTION_NOTE` vào ngữ cảnh của từng subagent để ngăn chặn các mẫu lệnh bash heredoc (`<<'EOF'`) không tương thích gây sập shell trên môi trường Windows PowerShell.
+  - **Số liệu so sánh:** Lượng token tiêu thụ trung bình giảm từ `13,111` (`baseline`) xuống `12,321` (`subagents`) và `9,359` (`skills-auto`), giúp tiết kiệm 28.6% chi phí token.
+  - **Phân tích cơ chế dựa trên vết:** Vết thực thi cho thấy subagent cô lập không gian làm việc cục bộ, giúp tác tử tránh được lỗi ghi đè dữ liệu tệp tin ban đầu.
+  - **Hạn chế và bước tiếp theo:** Subagent chưa tự động kích hoạt đọc `skills/` ở lượt đầu tiên do bản chất phi trạng thái; giải pháp kế tiếp là kế thừa trực tiếp danh mục kỹ năng khả dụng vào prompt khởi tạo của subagent.
+  - **Chất lượng mã và khả năng tái lập:** Toàn bộ cơ chế được cài đặt tự động trong `src/lab/subagents.py` và `src/lab/agent.py`, vượt qua 100% bộ kiểm thử tự động của giảng viên.
