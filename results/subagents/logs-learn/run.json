@@ -1,0 +1,69 @@
+{
+  "task": "logs-learn",
+  "condition": "subagents",
+  "role": "learn",
+  "error": "APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-20b` in organization `org_01m44rsptce0e8cbtg590krw76` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8680, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+  "timestamp": "2026-10-07T03:08:06.344129+00:00",
+  "skills_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "seconds": 54.8,
+  "tokens": {
+    "input": 8597,
+    "output": 3498,
+    "total": 12095
+  },
+  "tool_calls": 0,
+  "subagent_calls": 0,
+  "skills_read": 0,
+  "skills_modified": false,
+  "final_message": "",
+  "score": 0.0,
+  "passed": 0,
+  "total": 9,
+  "checks": [
+    {
+      "name": "valid_structure",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    },
+    {
+      "name": "entry_count",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    },
+    {
+      "name": "timestamps_utc",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    },
+    {
+      "name": "exception_fields",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    },
+    {
+      "name": "repeat_counts",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    },
+    {
+      "name": "counts_by_service",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    },
+    {
+      "name": "rule_service_names",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    },
+    {
+      "name": "rule_sorted_errors",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    },
+    {
+      "name": "rule_schema_header",
+      "passed": false,
+      "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\deepagents_sandbox_7zcexaqq\\\\workspace\\\\errors.json'"
+    }
+  ]
+}

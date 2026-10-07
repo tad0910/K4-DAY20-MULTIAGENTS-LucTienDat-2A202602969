@@ -3,13 +3,15 @@
 Pseudo-code: guides/pseudocode/01_agent.md
 Kiểm tra:    pytest tests/test_02_agent.py
 """
+import os
+import sys
 from pathlib import Path
 
-# TODO 1: import các thành phần cần dùng, ví dụ:
-#   from deepagents import create_deep_agent
-#   from deepagents.backends import LocalShellBackend
-#   from .model import make_model
-#   from .subagents import get_subagents
+from deepagents import create_deep_agent
+from deepagents.backends import LocalShellBackend
+
+from .model import make_model
+from .subagents import get_subagents
 
 # ---- CÓ SẴN, KHÔNG SỬA: system prompt dùng chung cho mọi sinh viên (để đường cơ sở so sánh được) ----
 PATHS_NOTE = (
@@ -47,7 +49,32 @@ def make_backend(sandbox: Path):
       - Tác tử chạy được lệnh shell và gọi được `python` (cần đặt PATH).
       - KHÔNG chuyển biến môi trường của bạn vào shell của tác tử (khóa API không được lộ).
     """
-    raise NotImplementedError("TODO 2: cài đặt make_backend (xem guides/pseudocode/01_agent.md)")
+    python_dir = str(Path(sys.executable).parent)
+    path_parts = [python_dir]
+    git_usr = Path("C:/Program Files/Git/usr/bin")
+    if git_usr.exists():
+        path_parts.append(str(git_usr))
+    path_parts.extend(["/usr/local/bin", "/usr/bin", "/bin"])
+
+    sep = os.pathsep if os.name == "nt" else ":"
+    env = {
+        "PATH": sep.join(path_parts),
+        "HOME": str(sandbox),
+        "PYTHONDONTWRITEBYTECODE": "1",
+    }
+    if os.name == "nt":
+        if "SYSTEMROOT" in os.environ:
+            env["SYSTEMROOT"] = os.environ["SYSTEMROOT"]
+        if "COMSPEC" in os.environ:
+            env["COMSPEC"] = os.environ["COMSPEC"]
+
+    return LocalShellBackend(
+        root_dir=sandbox,
+        virtual_mode=True,
+        inherit_env=False,
+        env=env,
+        timeout=120,
+    )
 
 
 def build_agent(sandbox: Path, mode: str = "single", use_skills: bool = False, model=None):
@@ -64,4 +91,39 @@ def build_agent(sandbox: Path, mode: str = "single", use_skills: bool = False, m
     mode không hợp lệ -> ném ValueError.
     Trả về: đồ thị (graph) đã biên dịch, gọi bằng `.invoke({"messages": [...]})`.
     """
-    raise NotImplementedError("TODO 3: cài đặt build_agent (xem guides/pseudocode/01_agent.md)")
+    if mode not in {"single", "subagents"}:
+        raise ValueError(f"Chế độ không hợp lệ: {mode}. Chỉ hỗ trợ 'single' hoặc 'subagents'.")
+
+    kwargs = {}
+    EXECUTION_NOTE = (
+        " IMPORTANT SHELL RULE: You are running on Windows. Bash heredocs (<<'EOF', <<'PY') "
+        "and multi-line shell strings are NOT supported and will fail. "
+        "To run Python code, ALWAYS save it as a file first using write_file (e.g. workspace/solution.py), "
+        "then execute('python workspace/solution.py')."
+    )
+    prompt = BASE_PROMPT + EXECUTION_NOTE
+
+    if mode == "subagents":
+        kwargs["subagents"] = [
+            {**sub, "system_prompt": sub["system_prompt"] + " " + PATHS_NOTE + EXECUTION_NOTE}
+            for sub in get_subagents()
+        ]
+        prompt = prompt + SUBAGENTS_NOTE
+
+    if use_skills:
+        kwargs["skills"] = ["/skills/"]
+        prompt = prompt + SKILLS_NOTE
+
+    model_obj = model or make_model()
+    if hasattr(model_obj, "max_tokens") and getattr(model_obj, "max_tokens", None) is None:
+        try:
+            model_obj.max_tokens = 8192
+        except Exception:
+            pass
+
+    return create_deep_agent(
+        model=model_obj,
+        system_prompt=prompt,
+        backend=make_backend(sandbox),
+        **kwargs,
+    )
