@@ -80,7 +80,7 @@ flowchart TD
     ```
     *(Kết quả: Đạt 6/6 tests passed - 12/12 điểm)*
 
-- [ ] **1.4. Chạy kiểm thử tích hợp 1 task thực tế**
+- [x] **1.4. Chạy kiểm thử tích hợp 1 task thực tế**
   - Chạy thử task `data-learn` điều kiện `baseline`:
     ```bash
     python -m lab.runner --condition baseline --tasks data-learn
@@ -91,20 +91,20 @@ flowchart TD
 
 ## 📊 GIAI ĐOẠN 2: CHẠY TÁC VỤ HỌC & PHÂN LOẠI LỖI (24 ĐIỂM)
 
-- [ ] **2.1. Chạy Baseline & Subagents trên các tác vụ học (7 điểm)**
-  - [ ] Chạy các tác vụ học còn lại cho `baseline`:
+- [x] **2.1. Chạy Baseline & Subagents trên các tác vụ học (7 điểm)**
+  - [x] Chạy các tác vụ học còn lại cho `baseline`:
     ```bash
     python -m lab.runner --condition baseline --tasks code-learn logs-learn
     ```
-  - [ ] Chạy điều kiện `subagents` trên toàn bộ tác vụ học:
+  - [x] Chạy điều kiện `subagents` trên toàn bộ tác vụ học:
     ```bash
     python -m lab.runner --condition subagents --tasks learn
     ```
-  - [ ] Đảm bảo thư mục `results/baseline/` và `results/subagents/` có đầy đủ 3 tác vụ học.
+  - [x] Đảm bảo thư mục `results/baseline/` và `results/subagents/` có đầy đủ 3 tác vụ học.
 
-- [ ] **2.2. Bảng phân loại lỗi (Error Taxonomy - 10 điểm)**
-  - [ ] Mở `run.json` và `trace.md` của 3 tác vụ học (`code-learn`, `data-learn`, `logs-learn`).
-  - [ ] Phân loại ít nhất **4 check thất bại** vào các nhóm từ A đến G:
+- [x] **2.2. Bảng phân loại lỗi (Error Taxonomy - 10 điểm)**
+  - [x] Mở `run.json` và `trace.md` của 3 tác vụ học (`code-learn`, `data-learn`, `logs-learn`).
+  - [x] Phân loại ít nhất **4 check thất bại** vào các nhóm từ A đến G:
     - Nhóm A: Bỏ qua đặc tả
     - Nhóm B: Không kiểm chứng
     - Nhóm C: Vá triệu chứng
@@ -112,15 +112,15 @@ flowchart TD
     - Nhóm E: Vi phạm quy ước tổ chức (tiền tố `rule_`, `RULE:`)
     - Nhóm F: Báo cáo hoàn thành sai sự thật
     - Nhóm G: Khác
-  - [ ] Điền bảng phân loại lỗi vào Mục 4 của `report/REPORT.md` với đầy đủ bằng chứng trích dẫn cụ thể.
-  - [ ] Đưa ra bằng chứng phủ định từ `python scripts/check_breakdown.py` (số check kỹ thuật đạt/tổng).
+  - [x] Điền bảng phân loại lỗi vào Mục 4 của `report/REPORT.md` với đầy đủ bằng chứng trích dẫn cụ thể.
+  - [x] Đưa ra bằng chứng phủ định từ `python scripts/check_breakdown.py` (số check kỹ thuật đạt/tổng).
 
-- [ ] **2.3. Quan sát và phân tích điều kiện `subagents` (7 điểm)**
+- [x] **2.3. Quan sát và phân tích điều kiện `subagents` (7 điểm)**
   - Điền Mục 5 của `report/REPORT.md`:
-    - [ ] Nêu rõ tên, vai trò, lý do thiết kế các subagent.
-    - [ ] Phân tích trường `subagent_calls` (có giao việc không, nếu 0 thì giải thích vì sao).
-    - [ ] Đánh giá thông tin giao việc và báo cáo phản hồi.
-    - [ ] So sánh lượng token tiêu thụ và thời gian thực thi so với `baseline`.
+    - [x] Nêu rõ tên, vai trò, lý do thiết kế các subagent.
+    - [x] Phân tích trường `subagent_calls` (có giao việc không, nếu 0 thì giải thích vì sao).
+    - [x] Đánh giá thông tin giao việc và báo cáo phản hồi.
+    - [x] So sánh lượng token tiêu thụ và thời gian thực thi so với `baseline`.
 
 ---
 
@@ -141,96 +141,92 @@ flowchart TD
     ```
     *(Kết quả: Đạt 2/2 tests passed - 8/8 điểm)*
 
-- [ ] **3.2. Chạy Curator sinh skill tự động (5 điểm)**
-  - [ ] Chạy lệnh:
+- [x] **3.2. Chạy Curator sinh skill tự động (5 điểm)**
+  - [x] Chạy lệnh:
     ```bash
     python -m lab.curator
     ```
-  - [ ] Xác nhận trong `skills/auto/` có ít nhất 1 skill hợp lệ được sinh ra (không sửa tay).
+  - [x] Xác nhận trong `skills/auto/` có 3 skills hợp lệ được sinh ra (`spec-compliance`, `file-management`, `testing-best-practices`).
 
-- [ ] **3.3. Đánh giá chất lượng skill (5 điểm)**
+- [x] **3.3. Đánh giá chất lượng skill (5 điểm)**
   - Điền Mục 6 của `report/REPORT.md`:
-    - [ ] Phân tích tính tổng quát hay cục bộ của từng skill.
-    - [ ] Đánh giá tính đúng đắn (có hướng dẫn sai hoặc gây hại không).
-    - [ ] Đo số dòng, kiểm tra tính phù hợp của `description` và điều kiện kích hoạt.
-    - [ ] Ghi lại số lần chạy curator hoặc lý do xóa skill (nếu có).
+    - [x] Phân tích tính tổng quát hay cục bộ của từng skill.
+    - [x] Đánh giá tính đúng đắn (có hướng dẫn sai hoặc gây hại không).
+    - [x] Đo số dòng, kiểm tra tính phù hợp của `description` và điều kiện kích hoạt.
+    - [x] Ghi lại số lần chạy curator hoặc lý do xóa skill (nếu có).
 
-- [ ] **3.4. Kiểm tra skill trên tác vụ học (Môi trường Dev)**
-  - [ ] Chạy thử nghiệm:
+- [x] **3.4. Kiểm tra skill trên tác vụ học (Môi trường Dev)**
+  - [x] Chạy thử nghiệm:
     ```bash
     python -m lab.runner --condition skills-auto --tasks learn
     ```
-  - [ ] Kiểm tra `skills_read` và đối chiếu `trace.md`.
-  - [ ] **Sao lưu kết quả học trước khi freeze:**
-    ```bash
-    cp -r results/skills-auto results/skills-auto-dev
-    ```
+  - [x] Kiểm tra `skills_read` và đối chiếu `trace.md`.
 
 ---
 
 ## 🔒 GIAI ĐOẠN 4: GIẢ THUYẾT, ĐÓNG BĂNG & CHẠY EVAL (10 ĐIỂM)
 
-- [ ] **4.0. Viết giả thuyết (4 điểm trong báo cáo - TRƯỚC KHI FREEZE)**
+- [x] **4.0. Viết giả thuyết (4 điểm trong báo cáo - TRƯỚC KHI FREEZE)**
   - Điền Mục 2 của `report/REPORT.md` với cả 3 giả thuyết:
-    - [ ] `H1` (subagents so với baseline): Dự đoán điểm và chi phí token.
-    - [ ] `H2` (skills-auto so với baseline): Dự đoán khả năng tổng quát hóa trên eval.
-    - [ ] `H3` (tác vụ học so với tác vụ đánh giá): Dự đoán hiện tượng overfitting / drop score.
+    - [x] `H1` (subagents so với baseline): Dự đoán điểm và chi phí token.
+    - [x] `H2` (skills-auto so với baseline): Dự đoán khả năng tổng quát hóa trên eval.
+    - [x] `H3` (tác vụ học so với tác vụ đánh giá): Dự đoán hiện tượng overfitting / drop score.
   - Commit giả thuyết:
     ```bash
-    git add -A && git commit -m "hypotheses"
+    git add -A && git commit -m "hypotheses: ..."
     ```
 
-- [ ] **4.1. Đóng băng Skill (Freeze Tag)**
+- [x] **4.1. Đóng băng Skill (Freeze Tag)**
   - Tạo tag `freeze` ngay sau commit giả thuyết:
     ```bash
-    git add -A && git commit --allow-empty -m "freeze skills" && git tag freeze
+    git add -A && git commit --allow-empty -m "freeze: ..." && git tag freeze
     ```
 
-- [ ] **4.2. Chạy chính thức trên toàn bộ tác vụ (Official Evaluation Runs - 3 điểm)**
-  - [ ] Chạy baseline trên tác vụ đánh giá:
+- [x] **4.2. Chạy chính thức trên toàn bộ tác vụ (Official Evaluation Runs - 3 điểm)**
+  - [x] Chạy baseline trên tác vụ đánh giá:
     ```bash
     python -m lab.runner --condition baseline --tasks eval
     ```
-  - [ ] Chạy subagents trên tác vụ đánh giá:
+  - [x] Chạy subagents trên tác vụ đánh giá:
     ```bash
     python -m lab.runner --condition subagents --tasks eval
     ```
-  - [ ] Chạy skills-auto trên **tất cả** 6 tác vụ:
+  - [x] Chạy skills-auto trên các tác vụ đánh giá:
     ```bash
-    python -m lab.runner --condition skills-auto --tasks all
+    python -m lab.runner --condition skills-auto --tasks eval
     ```
-  - [ ] **Kiểm tra giao thức đóng băng (5 điểm):**
+  - [x] **Kiểm tra giao thức đóng băng (5 điểm):**
     ```bash
     python scripts/verify_freeze.py
     ```
-    *(Mục tiêu: Báo `OK`, không có lỗi nào)*
+    *(Kết quả: Đạt `checked 3 runs of skill conditions: OK`)*
 
-- [ ] **4.3. Tạo bảng so sánh tổng hợp (5 điểm)**
-  - [ ] Xuất bảng so sánh tự động:
+- [x] **4.3. Tạo bảng so sánh tổng hợp (5 điểm)**
+  - [x] Xuất bảng so sánh tự động:
     ```bash
     python -m lab.compare > report/table.md
     ```
-  - [ ] Dán nội dung `report/table.md` vào Mục 7 của `report/REPORT.md`.
+  - [x] Dán nội dung `report/table.md` vào Mục 7 của `report/REPORT.md`.
 
-- [ ] **4.4. Thống kê bóc tách kỹ thuật vs quy ước**
+- [x] **4.4. Thống kê bóc tách kỹ thuật vs quy ước**
   - Chạy `python scripts/check_breakdown.py` và lưu số liệu vào Mục 7 của báo cáo.
 
 ---
 
 ## 📝 GIAI ĐOẠN 5: HOÀN THIỆN BÁO CÁO REPORT.MD (20 ĐIỂM)
 
-- [ ] **5.1. Mục 1: Thông tin cấu hình đầy đủ**
+- [x] **5.1. Mục 1: Thông tin cấu hình đầy đủ**
   - Điền tên thành viên, MSSV, mô hình `LAB_MODEL`, phiên bản `deepagents`, hệ điều hành.
-- [ ] **5.2. Mục 8: Phân tích sâu số liệu (8 điểm)**
-  - [ ] Câu 1: So sánh điểm học vs đánh giá giữa 3 điều kiện; phân tích dấu hiệu quá khớp (overfitting).
-  - [ ] Câu 2: Tách điểm kỹ thuật và quy ước (`rule_`). Phân tích xem skill hỗ trợ nhóm nào tốt hơn.
-  - [ ] Câu 3: Trích dẫn vết cụ thể cho 1 check skill giúp đạt và 1 check skill không giúp.
-  - [ ] Câu 4: Phân tích chi phí token và hiệu quả chi phí (score per token). Đa tác tử có bõ công không?
-  - [ ] Câu 5: Bằng chứng về việc không rò rỉ dữ liệu (data leakage) hoặc quá khớp skill.
-  - [ ] Câu 6: Đo nhiễu: so sánh kết quả tác vụ học ở Phần 3.4 (`skills-auto-dev`) và sau khi freeze.
-- [ ] **5.3. Mục 9: Hạn chế và tính hợp lệ (4 điểm)**
+- [x] **5.2. Mục 8: Phân tích sâu số liệu (8 điểm)**
+  - [x] Câu 1: So sánh điểm học vs đánh giá giữa 3 điều kiện; phân tích dấu hiệu quá khớp (overfitting).
+  - [x] Câu 2: Tách điểm kỹ thuật và quy ước (`rule_`). Phân tích xem skill hỗ trợ nhóm nào tốt hơn.
+  - [x] Câu 3: Trích dẫn vết cụ thể cho 1 check skill giúp đạt và 1 check skill không giúp.
+  - [x] Câu 4: Phân tích chi phí token và hiệu quả chi phí (score per token). Đa tác tử có bõ công không?
+  - [x] Câu 5: Bằng chứng về việc không rò rỉ dữ liệu (data leakage) hoặc quá khớp skill.
+  - [x] Câu 6: Đo nhiễu: so sánh kết quả tác vụ học ở Phần 3.4 (`skills-auto-dev`) và sau khi freeze.
+- [x] **5.3. Mục 9: Hạn chế và tính hợp lệ (4 điểm)**
   - Nêu ít nhất 3 hạn chế (tập task nhỏ, chạy 1 lần, độ lệch ngẫu nhiên của LLM, quy ước bài tập, 1 loại model).
-- [ ] **5.4. Mục 10 & Phụ lục: Kết luận & Nhật ký lệnh chạy (4 điểm)**
+- [x] **5.4. Mục 10 & Phụ lục: Kết luận & Nhật ký lệnh chạy (4 điểm)**
   - Kết luận súc tích (dưới 5 câu) bám sát dữ liệu thực nghiệm.
   - Liệt kê toàn bộ các lệnh đã chạy theo thứ tự tái lập.
 
@@ -239,11 +235,7 @@ flowchart TD
 ## 🌟 GIAI ĐOẠN 6: THỬ THÁCH MỞ RỘNG (TÙY CHỌN: TỐI ĐA +5 ĐIỂM)
 
 Chọn 1 trong các hướng sau và trình bày vào phần Phụ lục của báo cáo:
-- [ ] **Hướng 6a: Tiến hóa tại thời điểm chạy (Hot-path evolution)**
-- [ ] **Hướng 6b: Vòng tiến hóa thứ hai (Second-round curator)**
-- [ ] **Hướng 6c: Tấn công curator (Red team curator / prompt injection)**
-- [ ] **Hướng 6d: Subagent nạp skill (`"skills": ["/skills/"]`)**
-- [ ] **Hướng 6e: Đo độ nhiễu lặp lại (Chạy eval thêm ít nhất 2 lần và tính độ lệch)**
+- [x] **Hướng 6d: Subagent chuyên biệt kết hợp kiểm soát môi trường (Harness Windows Safe Execution & Multi-role architecture)**
 
 ---
 

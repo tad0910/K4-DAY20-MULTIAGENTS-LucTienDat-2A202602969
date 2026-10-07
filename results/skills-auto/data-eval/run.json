@@ -1,0 +1,69 @@
+{
+  "task": "data-eval",
+  "condition": "skills-auto",
+  "role": "eval",
+  "error": "APIStatusError: Error code: 413 - {'error': {'message': 'Request too large for model `openai/gpt-oss-120b` in organization `org_01m44rsptce0e8cbtg590krw76` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 8285, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+  "timestamp": "2026-10-07T03:32:10.461468+00:00",
+  "skills_sha256": "692b15cb02ca30b95f61f68864e8c9a6fffe51d545f59eb9ab9507416582a016",
+  "seconds": 79.9,
+  "tokens": {
+    "input": 14687,
+    "output": 191,
+    "total": 14878
+  },
+  "tool_calls": 0,
+  "subagent_calls": 0,
+  "skills_read": 0,
+  "skills_modified": false,
+  "final_message": "",
+  "score": 0.0,
+  "passed": 0,
+  "total": 9,
+  "checks": [
+    {
+      "name": "march_revenue_utc",
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "name": "march_orders_utc",
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "name": "top_category",
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "name": "missing_total_orders",
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_events_removed",
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "name": "rule_money_in_cents",
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "name": "rule_meta_block",
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "name": "rule_clean_csv",
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "name": "rule_sorted_keys_format",
+      "passed": false,
+      "detail": ""
+    }
+  ]
+}
